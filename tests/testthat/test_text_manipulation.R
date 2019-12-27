@@ -17,7 +17,7 @@ test_that("rot output matches expected values", {
                                  up=c(LETTERS, "\u00c6", "\u00d8", "\u00c5"))),
                "Tykqryvt!")
   expect_equal(
-    rot("Abc4567xyZ", n=3, alphabet = list(lw=c(letters, 0:4), up=c(LETTERS, 5:9))),
+    rot("Abc4567xyZ", 3, alphabet=list(lw=c(letters, 0:4), up=c(LETTERS, 5:9))),
     "Defc89A017"
   )
 })

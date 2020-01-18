@@ -21,3 +21,14 @@ test_that("rot output matches expected values", {
     "Defc89A017"
   )
 })
+
+context("rot_all")
+
+test_that("rot_all outputs are of the same length as the alphabet", {
+  expect_equal(length(rot_all("a")), 26)
+  expect_equal(length(rot_all("a\u00e6")), 26)
+  expect_equal(length(rot_all("a", alphabet=letters[1:4])), 4)
+})
+test_that("rot_all outputs are as expected", {
+  expect_equal(rot_all("a", alphabet=letters[1:4]), c("b", "c", "d", "a"))
+})

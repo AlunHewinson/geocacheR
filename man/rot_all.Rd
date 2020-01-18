@@ -7,9 +7,9 @@
 rot_all(x, alphabet = list(lw = letters, up = LETTERS))
 }
 \arguments{
-\item{x}{A string}
+\item{x}{A string.}
 
-\item{alphabet}{A list containing lower and upper case alphabets}
+\item{alphabet}{A list containing lower and upper case alphabets.}
 }
 \value{
 a vector of strings

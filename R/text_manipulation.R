@@ -2,9 +2,9 @@
 
 #' rot a string by a given number of letters.
 #'
-#' @param x A string
-#' @param n A number of letters to rot the string by
-#' @param alphabet A list containing lower and upper case alphabets
+#' @param x A string.
+#' @param n A number of letters to rot the string by.
+#' @param alphabet A list containing lower and upper case alphabets.
 #'
 #' @return A string
 #'
@@ -12,6 +12,7 @@
 #' rot("abc")
 #' rot("abc", n=2)
 #' rot("abc", n=5, list(lw=letters[1:7], up=LETTERS[1:7]))
+#' @export
 rot <- function(x, n=13, alphabet=list(lw=letters, up=LETTERS)) {
   ## is alphabet a list? If not, make it so
   if(is.list(alphabet)) {
@@ -43,14 +44,15 @@ rot <- function(x, n=13, alphabet=list(lw=letters, up=LETTERS)) {
 
 #' rot a string over all possible n
 #'
-#' @param x A string
-#' @param alphabet A list containing lower and upper case alphabets
+#' @param x A string.
+#' @param alphabet A list containing lower and upper case alphabets.
 #'
 #' @return a vector of strings
 #'
 #' @examples
 #' rot_all("abc")
 #' rot_all("abc", list(lw=letters[1:7], up=LETTERS[1:7]))
+#' @export
 rot_all <- function(x, alphabet=list(lw=letters, up=LETTERS)) {
   ## is alphabet a list? If not, make it so
   if(is.list(alphabet)) {

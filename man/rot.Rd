@@ -7,11 +7,11 @@
 rot(x, n = 13, alphabet = list(lw = letters, up = LETTERS))
 }
 \arguments{
-\item{x}{A string}
+\item{x}{A string.}
 
-\item{n}{A number of letters to rot the string by}
+\item{n}{A number of letters to rot the string by.}
 
-\item{alphabet}{A list containing lower and upper case alphabets}
+\item{alphabet}{A list containing lower and upper case alphabets.}
 }
 \value{
 A string

@@ -4,11 +4,12 @@ Imports:
     dplyr,
     stringr,
     magrittr,
+    tibble,
     threewords
 Title: Tools for Geocaching
-Version: 0.0.0.9000
+Version: 0.0.0.9001
+Date: 2020-01-19
 Authors@R: person("Alun", "Hewinson", email="alunhewinson@gmail.com", role=c("cre", "aut"))
-Maintainer: The package maintainer <yourself@somewhere.net>
 Description: Tools for solving common geocaching puzzle types, and other
     Geocaching-related tasks
 License: GPL-3

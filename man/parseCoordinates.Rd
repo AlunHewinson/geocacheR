@@ -2,9 +2,7 @@
 % Please edit documentation in R/coordinates.R
 \name{parseCoordinates}
 \alias{parseCoordinates}
-\title{importFrom magrittr `%>%`
-importFrom magrittr `%<>%`
-Parse Coordinates into Numeric Format}
+\title{Parse Coordinates into Numeric Format}
 \usage{
 parseCoordinates(x)
 }

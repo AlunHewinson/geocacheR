@@ -4,7 +4,7 @@
 \alias{rot_all}
 \title{rot a string over all possible n}
 \usage{
-rot_all(x, alphabet = list(lw = letters, up = LETTERS))
+rot_all(x, alphabet = standard_alphabet)
 }
 \arguments{
 \item{x}{A string.}

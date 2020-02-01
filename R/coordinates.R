@@ -1,6 +1,3 @@
-#' importFrom magrittr `%>%`
-#' importFrom magrittr `%<>%`
-
 #' Parse Coordinates into Numeric Format
 #'
 #' parseCoordinates takes a variety of string inputs for coordinates in the
@@ -190,5 +187,10 @@ w3w <- function(x) {
     stringr::str_split("\\.") %>%
     unlist()
   if (length(x)!=3) stop("I do not understand the input format")
-  threewords::from_words(Sys.getenv("W3WAPIKey"), words=x)$position
+  to_return <- tryCatch(expr = {
+    threewords::from_words(Sys.getenv("W3WAPIKey"), words=x)$position
+  }, error = function(e) {
+    c(NA, NA)
+  })
+  to_return
 }

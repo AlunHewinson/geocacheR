@@ -23,7 +23,8 @@ What 3 Words wrapper
 \dontrun{
 w3w("president.always.lying")
 w3w("unseen.academicals.football") ## returns NAs
-w3w(list("special.tools.required", "cliffs.falling.rocks", "available.during.winter", "ultraviolet.light.required"))
+w3w(list("special.tools.required", "cliffs.falling.rocks",
+         "available.during.winter", "ultraviolet.light.required"))
 w3w(c("protests", "memo", "consoles"))
 }
 }

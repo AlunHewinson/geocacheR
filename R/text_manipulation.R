@@ -134,6 +134,13 @@ vigenere <- function(x, key, decrypt=TRUE, alphabet=standard_alphabet) {
 }
 
 #' Encrypt a string using the Vigenere cipher
+#'
+#' This is a wrapper for vigenere where decrypt is set to FALSE
+#'
+#' @param x A string to encrypt or decrypt
+#' @param key The encryption or decryption key
+#' @param alphabet A list of letters in lower and upper case
+#'
 #' @seealso \code{\link{vigenere}}
 #' @export
 qqmiaiii <- function(x, key, alphabet=standard_alphabet) {

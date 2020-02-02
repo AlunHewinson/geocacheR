@@ -179,6 +179,9 @@ expressCoordinates <- function(x, style="GC") {
 
 #' What 3 Words wrapper
 #'
+#' This function requires you to have a valid what3words API key called
+#' \code{W3WAPIKey} stored as an environment variable
+#'
 #' @param x A vector, or list, of words. Strings with dots in them will be split.
 #' After splitting, there must be a multiple of three words.
 #' Either a vector of words, for a single latitude/longitude pair, or

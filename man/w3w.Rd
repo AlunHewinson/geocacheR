@@ -17,7 +17,8 @@ single string of three words separated by full stops.}
 a numeric vector of length 2, consisting of lat(itude) and lon(gitude)
 }
 \description{
-What 3 Words wrapper
+This function requires you to have a valid what3words API key called
+\code{W3WAPIKey} stored as an environment variable
 }
 \examples{
 \dontrun{

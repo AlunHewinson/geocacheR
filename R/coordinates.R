@@ -40,7 +40,7 @@ parseCoordinates <- function(x) {
       "([NS-]{0,1})",    ## 2 N, S or minus sign
       "([\\s]*)",        ## 3 whitespace
       "([0-9]{1,2})",    ## 4 north degrees
-      "([\\s°]*)",       ## 5 whitespace and or degree symbol
+      "([\\s\ub0]*)",    ## 5 whitespace and or degree symbol
       "([0-9]{1,2})",    ## 6 north minutes
       "(\\.)",           ## 7 decimal point
       "([0-9]{3})",      ## 8 north decimal minutes
@@ -49,7 +49,7 @@ parseCoordinates <- function(x) {
       "([EW-]{0,1})",    ## 11 E, W or minus sign
       "([\\s]*)",        ## 12 whitespace
       "([0-9]{1,3})",    ## 13 east degrees
-      "([\\s°]*)",       ## 14 whitespace and or degree symbol
+      "([\\s\ub0]*)",    ## 14 whitespace and or degree symbol
       "([0-9]{1,2})",    ## 15 east minutes
       "(\\.)",           ## 16 decimal point
       "([0-9]{3})",      ## 17 east decimal minutes
@@ -62,13 +62,13 @@ parseCoordinates <- function(x) {
       "([\\s]*)",                    ## 3  whitespace
       "([0-9]{1,2})",                ## 4  north degrees
       "(([\\.]{0,1})([0-9]+){0,1})", ## 5  decimal point plus at least one digit
-      "([\\s°]{0,1})",               ## 6  whitespace or degrees symbol
+      "([\\s\ub0]{0,1})",            ## 6  whitespace or degrees symbol
       "([\\s,;\\|/]+)",              ## 7  separator
       "([EW-]{0,1})",                ## 8  E, W or minus sign
       "([\\s]*)",                    ## 9  whitespace
       "([0-9]{1,3})",                ## 10 north degrees
       "(([\\.]{0,1})([0-9]+){0,1})", ## 11 decimal point plus at least one digit
-      "([\\s°]{0,1})",               ## 12 whitespace or degrees symbol
+      "([\\s\ub0]{0,1})",            ## 12 whitespace or degrees symbol
       "([\\s]*)$"                    ## 13 trailing whitespace
     )
     DMSs <- paste0(
@@ -76,24 +76,22 @@ parseCoordinates <- function(x) {
       "([NS-]{0,1})",                ## 2  N, S or minus sign
       "([\\s]*)",                    ## 3  whitespace
       "([0-9]{1,2})",                ## 4  north degrees
-      "([\\s°]+)",                   ## 5  whitespace and or degree symbol
+      "([\\s\ub0]+)",                ## 5  whitespace and or degree symbol
       "([0-9]{1,2})",                ## 6  north minutes
       "([\\s']+)",                   ## 7  whitespace and or minute symbol
       "([0-9]{1,2})",                ## 8  north decimal seconds
       "(([\\.]{0,1})([0-9]+){0,1})", ## 9  decimal point plus at least one digit
-      "([\\s\"]*)",                  ## 10  whitespace and or second symbol
+      "([\\s\"]*)",                  ## 10 whitespace and or second symbol
       "([\\s,;\\|/]+)",              ## 11 separator
-
       "([EW-]{0,1})",                ## 12 E, W or minus sign
       "([\\s]*)",                    ## 13 whitespace
       "([0-9]{1,3})",                ## 14 east degrees
-      "([\\s°]+)",                   ## 15 whitespace and or degree symbol
+      "([\\s\ub0]+)",                ## 15 whitespace and or degree symbol
       "([0-9]{1,2})",                ## 16 east minutes
       "([\\s']+)",                   ## 17 whitespace and or degree symbol
       "([0-9]{1,2})",                ## 18 east decimal seconds
       "(([\\.]{0,1})([0-9]+){0,1})", ## 19 decimal point plus at least one digit
-      "([\\s\"]*)",                  ## 20  whitespace and or second symbol
-
+      "([\\s\"]*)",                  ## 20 whitespace and or second symbol
       "([\\s]*)$"                    ## 21 trailing whitespace
     )
   }
@@ -198,17 +196,14 @@ expressCoordinates <- function(x, style="GC") {
 #' }
 #' @export
 w3w <- function(x) {
-  #if (length(x)==1)
   x %<>%
     stringr::str_split("\\.") %>%
     unlist()
-  #print(x)
-  if (length(x) %% 3 != 0) stop("Error:\n geocacheR::w3w\n  Unknown input format")
+  if (length(x) %% 3 != 0) stop("Error: geocacheR::w3w  Unknown input format")
   x %<>%
     matrix(ncol=3, byrow=TRUE) %>%
     as.data.frame()
   to_return <- apply(x, 1, function(q) {
-    #print(q)
     tryCatch(expr = {
       threewords::from_words(Sys.getenv("W3WAPIKey"), words=q)$position
     }, error = function(e) {

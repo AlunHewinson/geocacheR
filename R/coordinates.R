@@ -137,7 +137,18 @@ parseCoordinates <- function(x) {
   return(c(north=0, east=0))
 }
 
-#' Express decimal coordinates in other (text) formats
+#' Express Decimal Coordinates in Other (text) Formats
+#'
+#' Designed to convert into Geocaching-style style coordinates, but future styles may be accomodated.
+#'
+#' @param x A numeric vector of length 2
+#' @param style placeholder for future development if requirements emerge
+#'
+#' @return A character of length 1 with an alternative expression of the coordinates
+#'
+#' @examples
+#' expressCoordinates(c(55.9327, -3.25103))
+#'
 #' @export
 expressCoordinates <- function(x, style="GC") {
   if (!is.numeric(x)) {
@@ -145,8 +156,8 @@ expressCoordinates <- function(x, style="GC") {
             "was not numeric; attempting to parse...")
     x <- parseCoordinates(x)
   } else if(!length(x)==2) {
-    error("The numeric input to geocacheR::expressCoordinates() ",
-          "was not of length 2")
+    stop("The numeric input to geocacheR::expressCoordinates() ",
+         "was not of length 2")
   }
 
   n <- x[1]
@@ -166,31 +177,45 @@ expressCoordinates <- function(x, style="GC") {
     ec, sprintf("%03d", ed), " ",
     sprintf("%006.3f", em)
   )
-
-  #return("~")
 }
-expressCoordinates(c(55.98723, -3.91576))
 
 #' What 3 Words wrapper
 #'
-#' @param x Either a vector of words, for a single latitude/longitude pair, or
+#' @param x A vector, or list, of words. Strings with dots in them will be split.
+#' After splitting, there must be a multiple of three words.
+#' Either a vector of words, for a single latitude/longitude pair, or
 #' a list of vectors for vectorised operations. This wrapper also accepts a
 #' single string of three words separated by full stops.
 #'
-#' @return a thing
+#' @return a numeric vector of length 2, consisting of lat(itude) and lon(gitude)
 #'
 #' @examples
-#' blah()
+#' \dontrun{
+#' w3w("president.always.lying")
+#' w3w("unseen.academicals.football") ## returns NAs
+#' w3w(list("special.tools.required", "cliffs.falling.rocks", "available.during.winter", "ultraviolet.light.required"))
+#' w3w(c("protests", "memo", "consoles"))
+#' }
 #' @export
 w3w <- function(x) {
-  if (length(x)==1) x %<>%
+  #if (length(x)==1)
+  x %<>%
     stringr::str_split("\\.") %>%
     unlist()
-  if (length(x)!=3) stop("I do not understand the input format")
-  to_return <- tryCatch(expr = {
-    threewords::from_words(Sys.getenv("W3WAPIKey"), words=x)$position
-  }, error = function(e) {
-    c(NA, NA)
-  })
+  #print(x)
+  if (length(x) %% 3 != 0) stop("Error:\n geocacheR::w3w\n  Unknown input format")
+  x %<>%
+    matrix(ncol=3, byrow=TRUE) %>%
+    as.data.frame()
+  to_return <- apply(x, 1, function(q) {
+    #print(q)
+    tryCatch(expr = {
+      threewords::from_words(Sys.getenv("W3WAPIKey"), words=q)$position
+    }, error = function(e) {
+      c(latitude=NA, longitude=NA)
+    })
+  }) %>%
+    t()
+  colnames(to_return) <- c("lat", "lon")
   to_return
 }

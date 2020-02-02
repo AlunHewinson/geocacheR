@@ -11,7 +11,7 @@ Version: 0.1.0
 Date: 2020-02-02
 Authors@R: person("Alun", "Hewinson", email="alunhewinson@gmail.com", role=c("cre", "aut"))
 Description: Tools for solving common geocaching puzzle types, and other
-    Geocaching-related tasks
+    Geocaching-related tasks.
 License: GPL-3
 Encoding: UTF-8
 LazyData: true

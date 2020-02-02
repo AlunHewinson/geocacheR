@@ -2,7 +2,7 @@
 % Please edit documentation in R/text_manipulation.R
 \name{rot_all}
 \alias{rot_all}
-\title{rot a string over all possible n}
+\title{Caesar-shift a string over all possible number n}
 \usage{
 rot_all(x, alphabet = standard_alphabet)
 }
@@ -15,7 +15,7 @@ rot_all(x, alphabet = standard_alphabet)
 a vector of strings
 }
 \description{
-rot a string over all possible n
+Caesar-shift a string over all possible number n
 }
 \examples{
 rot_all("abc")

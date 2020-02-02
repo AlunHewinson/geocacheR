@@ -21,3 +21,8 @@ A string
 \description{
 Encrypt or decrypt a string using a key
 }
+\examples{
+vigenere("MN vdopf wq brcep zwtcd.", "midway")
+vigenere("My treasure is buried he... find it who may.", "La Bouche", decrypt = FALSE)
+
+}

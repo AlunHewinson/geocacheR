@@ -2,14 +2,14 @@
 % Please edit documentation in R/text_manipulation.R
 \name{rot}
 \alias{rot}
-\title{rot a string by a given number of letters.}
+\title{Caesar-shift a string by a given number of letters.}
 \usage{
 rot(x, n = 13, alphabet = standard_alphabet, showWarn = TRUE)
 }
 \arguments{
 \item{x}{A string.}
 
-\item{n}{A number of letters to rot the string by.}
+\item{n}{A number of letters to shift the string by.}
 
 \item{alphabet}{A list containing lower and upper case alphabets.}
 
@@ -19,7 +19,7 @@ rot(x, n = 13, alphabet = standard_alphabet, showWarn = TRUE)
 A string
 }
 \description{
-rot a string by a given number of letters.
+Caesar-shift a string by a given number of letters.
 }
 \examples{
 rot("abc")

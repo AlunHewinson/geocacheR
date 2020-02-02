@@ -15,3 +15,7 @@ An integer vector
 \description{
 Find the value of words
 }
+\examples{
+word_score(c("infinite", "monkey", "cage"))
+
+}

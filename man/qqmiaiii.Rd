@@ -9,3 +9,6 @@ qqmiaiii(x, key, alphabet = standard_alphabet)
 \description{
 Encrypt a string using the Vigenere cipher
 }
+\seealso{
+\code{\link{vigenere}}
+}

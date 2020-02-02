@@ -2,10 +2,22 @@
 % Please edit documentation in R/coordinates.R
 \name{expressCoordinates}
 \alias{expressCoordinates}
-\title{Express decimal coordinates in other (text) formats}
+\title{Express Decimal Coordinates in Other (text) Formats}
 \usage{
 expressCoordinates(x, style = "GC")
 }
+\arguments{
+\item{x}{A numeric vector of length 2}
+
+\item{style}{placeholder for future development if requirements emerge}
+}
+\value{
+A character of length 1 with an alternative expression of the coordinates
+}
 \description{
-Express decimal coordinates in other (text) formats
+Designed to convert into Geocaching-style style coordinates, but future styles may be accomodated.
+}
+\examples{
+expressCoordinates(c(55.9327, -3.25103))
+
 }

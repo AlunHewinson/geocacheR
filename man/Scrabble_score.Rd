@@ -19,3 +19,7 @@ An integer vector
 \description{
 Find the Scrabble value of words
 }
+\examples{
+Scrabble_score(c("kwyjibo", "jozxyqk"))
+
+}

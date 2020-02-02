@@ -7,16 +7,23 @@
 w3w(x)
 }
 \arguments{
-\item{x}{Either a vector of words, for a single latitude/longitude pair, or
+\item{x}{A vector, or list, of words. Strings with dots in them will be split.
+After splitting, there must be a multiple of three words.
+Either a vector of words, for a single latitude/longitude pair, or
 a list of vectors for vectorised operations. This wrapper also accepts a
 single string of three words separated by full stops.}
 }
 \value{
-a thing
+a numeric vector of length 2, consisting of lat(itude) and lon(gitude)
 }
 \description{
 What 3 Words wrapper
 }
 \examples{
-blah()
+\dontrun{
+w3w("president.always.lying")
+w3w("unseen.academicals.football") ## returns NAs
+w3w(list("special.tools.required", "cliffs.falling.rocks", "available.during.winter", "ultraviolet.light.required"))
+w3w(c("protests", "memo", "consoles"))
+}
 }

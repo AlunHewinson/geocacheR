@@ -9,7 +9,7 @@ To install:
 remotes::install_github("AlunHewinson/geocacheR")
 ```
 
-To attach the function:
+To attach the package:
 ```
 library(geocacheR)
 ```

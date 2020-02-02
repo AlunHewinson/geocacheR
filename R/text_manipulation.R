@@ -1,12 +1,13 @@
 ## text manipulation
 
-#'@export
+#' The standard alphabet for the locale, for use in Caeser-based encryption etc.
+#' @export
 standard_alphabet <- list(lw=letters, up=LETTERS)
 
-#' rot a string by a given number of letters.
+#' Caesar-shift a string by a given number of letters.
 #'
 #' @param x A string.
-#' @param n A number of letters to rot the string by.
+#' @param n A number of letters to shift the string by.
 #' @param alphabet A list containing lower and upper case alphabets.
 #' @param showWarn boolean. Do you want to see warnings about alphabets?
 #'
@@ -52,7 +53,7 @@ rot <- function(x, n=13, alphabet=standard_alphabet, showWarn=TRUE) {
   dplyr::coalesce(y_lower, y_upper, x) %>% paste(collapse="")
 }
 
-#' rot a string over all possible n
+#' Caesar-shift a string over all possible number n
 #'
 #' @param x A string.
 #' @param alphabet A list containing lower and upper case alphabets.
@@ -92,6 +93,10 @@ rot_all <- function(x, alphabet=standard_alphabet) {
 #'
 #' @return A string
 #'
+#' @examples
+#' vigenere("MN vdopf wq brcep zwtcd.", "midway")
+#' vigenere("My treasure is buried he... find it who may.", "La Bouche", decrypt = FALSE)
+#'
 #' @export
 vigenere <- function(x, key, decrypt=TRUE, alphabet=standard_alphabet) {
   ## parse key for appearance in alphabets
@@ -129,6 +134,7 @@ vigenere <- function(x, key, decrypt=TRUE, alphabet=standard_alphabet) {
 }
 
 #' Encrypt a string using the Vigenere cipher
+#' @seealso \code{\link{vigenere}}
 #' @export
 qqmiaiii <- function(x, key, alphabet=standard_alphabet) {
   vigenere(x=x, key=key, decrypt = FALSE, alphabet = alphabet)

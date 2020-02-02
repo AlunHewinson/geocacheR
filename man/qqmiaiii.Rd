@@ -6,8 +6,15 @@
 \usage{
 qqmiaiii(x, key, alphabet = standard_alphabet)
 }
+\arguments{
+\item{x}{A string to encrypt or decrypt}
+
+\item{key}{The encryption or decryption key}
+
+\item{alphabet}{A list of letters in lower and upper case}
+}
 \description{
-Encrypt a string using the Vigenere cipher
+This is a wrapper for vigenere where decrypt is set to FALSE
 }
 \seealso{
 \code{\link{vigenere}}

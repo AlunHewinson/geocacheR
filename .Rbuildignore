@@ -1,2 +1,6 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+Alun20191227
+Alun201927
+^\*.pub
+cran-comments.md

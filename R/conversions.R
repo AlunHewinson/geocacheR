@@ -17,6 +17,9 @@ Scrabble <- tibble::tibble(
 #'
 #' @return An integer vector
 #'
+#' @examples
+#' Scrabble_score(c("kwyjibo", "jozxyqk"))
+#'
 #' @export
 Scrabble_score <- function(x, language="en") {
   matches <- x %>% str_split("")
@@ -31,6 +34,9 @@ Scrabble_score <- function(x, language="en") {
 #' @param x A vector of character strings
 #'
 #' @return An integer vector
+#'
+#' @examples
+#' word_score(c("infinite", "monkey", "cage"))
 #'
 #' @export
 word_score <- function(x) {

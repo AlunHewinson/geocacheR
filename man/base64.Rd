@@ -3,12 +3,12 @@
 \docType{data}
 \name{base64}
 \alias{base64}
-\title{A helper table for base64 conversion and looup}
+\title{A helper table for base64 conversion and lookup}
 \format{An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 64 rows and 3 columns.}
 \usage{
 base64
 }
 \description{
-A helper table for base64 conversion and looup
+A helper table for base64 conversion and lookup
 }
 \keyword{datasets}

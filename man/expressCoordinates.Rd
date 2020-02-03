@@ -15,7 +15,7 @@ expressCoordinates(x, style = "GC")
 A character of length 1 with an alternative expression of the coordinates
 }
 \description{
-Designed to convert into Geocaching-style style coordinates, but future styles may be accomodated.
+Designed to convert into Geocaching-style style coordinates, but future styles may be accommodated.
 }
 \examples{
 expressCoordinates(c(55.9327, -3.25103))

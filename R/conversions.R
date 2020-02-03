@@ -47,7 +47,7 @@ word_score <- function(x) {
   })
 }
 
-#' A helper table for base64 conversion and looup
+#' A helper table for base64 conversion and lookup
 #' @export
 base64 <- tibble::tribble(
   ~decimal, ~binary, ~b64,

@@ -1,6 +1,6 @@
 #' Parse Coordinates into Numeric Format
 #'
-#' parseCoordinates takes a variety of string inputs for coordinates in the
+#' \code{parseCoordinates} takes a variety of string inputs for coordinates in the
 #' following formats:
 #' - N00 00.000 W000 00.000
 #' - N00 00 00 W000 00 00
@@ -137,7 +137,7 @@ parseCoordinates <- function(x) {
 
 #' Express Decimal Coordinates in Other (text) Formats
 #'
-#' Designed to convert into Geocaching-style style coordinates, but future styles may be accomodated.
+#' Designed to convert into Geocaching-style style coordinates, but future styles may be accommodated.
 #'
 #' @param x A numeric vector of length 2
 #' @param style placeholder for future development if requirements emerge

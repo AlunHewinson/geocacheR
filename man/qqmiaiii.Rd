@@ -14,7 +14,7 @@ qqmiaiii(x, key, alphabet = standard_alphabet)
 \item{alphabet}{A list of letters in lower and upper case}
 }
 \description{
-This is a wrapper for vigenere where decrypt is set to FALSE
+This is a wrapper for \code{vigenere} where decrypt is set to FALSE
 }
 \seealso{
 \code{\link{vigenere}}

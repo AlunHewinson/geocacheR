@@ -13,7 +13,7 @@ parseCoordinates(x)
 A numeric vector holding the n(orth) and e(ast) coordinates
 }
 \description{
-parseCoordinates takes a variety of string inputs for coordinates in the
+\code{parseCoordinates} takes a variety of string inputs for coordinates in the
 following formats:
 - N00 00.000 W000 00.000
 - N00 00 00 W000 00 00

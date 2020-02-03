@@ -1,6 +1,6 @@
 ## text manipulation
 
-#' The standard alphabet for the locale, for use in Caeser-based encryption etc.
+#' The standard alphabet for the locale, for use in Caesar-based encryption etc.
 #' @export
 standard_alphabet <- list(lw=letters, up=LETTERS)
 
@@ -135,7 +135,7 @@ vigenere <- function(x, key, decrypt=TRUE, alphabet=standard_alphabet) {
 
 #' Encrypt a string using the Vigenere cipher
 #'
-#' This is a wrapper for vigenere where decrypt is set to FALSE
+#' This is a wrapper for \code{vigenere} where decrypt is set to FALSE
 #'
 #' @param x A string to encrypt or decrypt
 #' @param key The encryption or decryption key

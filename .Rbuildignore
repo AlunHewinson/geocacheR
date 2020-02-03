@@ -4,3 +4,4 @@ Alun20191227
 Alun201927
 ^\*.pub
 cran-comments.md
+devtools_check_debian.md

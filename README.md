@@ -2,6 +2,8 @@
 
 A set of functions and data for geocaching-related tasks.
 
+![geocacheR hex sticker](/nobuild/sticker/geocacheR.png)
+
 ## installation  
 
 To install:  

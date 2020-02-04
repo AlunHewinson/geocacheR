@@ -6,4 +6,5 @@ Alun201927
 cran-comments.md
 devtools_check_debian.md
 News.md
+^\nobuild\*$
 ^CRAN-RELEASE$

@@ -8,7 +8,7 @@ standard_alphabet <- list(lw=letters, up=LETTERS)
 #'
 #' @param x A string.
 #' @param n A number of letters to shift the string by.
-#' @param alphabet A list containing lower and upper case alphabets.
+#' @param alphabet A list containing lower and upper case alphabets
 #' @param showWarn boolean. Do you want to see warnings about alphabets?
 #'
 #' @return A string
@@ -145,4 +145,32 @@ vigenere <- function(x, key, decrypt=TRUE, alphabet=standard_alphabet) {
 #' @export
 qqmiaiii <- function(x, key, alphabet=standard_alphabet) {
   vigenere(x=x, key=key, decrypt = FALSE, alphabet = alphabet)
+}
+
+#' Make a frequency table of the characters in a string
+#'
+#' @param x A character vector
+#' @param case_sensitive Logical. Should lower and upper case letters be kept separate
+#' @param alphabet A list containing lower and upper case alphabets
+#'
+#' @return A tibble of the frequencies, with one row for each input string
+#'
+#' @export
+analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabet) {
+  if(case_sensitive) {
+    alphabet %<>% unlist() %>% unique()
+  } else {
+    x %<>% toupper()
+    alphabet %<>% unlist() %>% toupper() %>% unique()
+  }
+  tables <- x %>%
+    str_split("") %>%
+    lapply(function(q) {
+      freq <- q %>% c(alphabet) %>% table()
+      freq[names(freq) %in% alphabet] <- freq[names(freq) %in% alphabet] - 1
+      freq %>% as.matrix() %>% t() %>% as.data.frame()
+    })
+  toRet <- tables %>% bind_rows()
+  toRet$input_string <- x
+  toRet
 }

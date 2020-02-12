@@ -156,13 +156,16 @@ qqmiaiii <- function(x, key, alphabet=standard_alphabet) {
 #' @return A tibble of the frequencies, with one row for each input string
 #'
 #' @export
-analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabet) {
+analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabet, collapse=FALSE) {
   if(case_sensitive) {
     alphabet %<>% unlist() %>% unique()
   } else {
     x %<>% toupper()
     alphabet %<>% unlist() %>% toupper() %>% unique()
   }
+
+  if (collapse != FALSE) x <- paste(x, collapse=collapse)
+
   tables <- x %>%
     str_split("") %>%
     lapply(function(q) {
@@ -173,4 +176,32 @@ analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabe
   toRet <- tables %>% bind_rows()
   toRet$input_string <- x
   toRet
+}
+
+#' Create "hashes" of the letters in a character vector
+#'
+#' The "hash" here is not a true hash, since the output has a variable number of
+#' characters, but is instead a string representation of the number of characters
+#' in the input string in hexadecimal format.
+#'
+#' @param x A character vector to be hashed
+#' @param case_sensitive NOT IN USE. This parameter will probably be removed
+#' @param alphabet NOT IN USE. This parameter will probably be removed
+#'
+#' @return A character vector equal in length to the input x
+#'
+#'
+alphash <- function(x, case_sensitive=FALSE, alphabet=standard_alphabet) {
+  #if(case_sensitive) {
+  #  alphabet %<>% unlist() %>% unique()
+  #} else {
+  #  x %<>% toupper()
+  #  alphabet %<>% unlist() %>% toupper() %>% unique()
+  #}
+
+  x %>%
+    #analyse_frequency(case_sensitive = case_sensitive) %>%
+    analyse_frequency() %>%
+    select(!!alphabet) %>%
+    apply(1, function(qq) qq %>% as.hexmode %>% paste(collapse="g"))
 }

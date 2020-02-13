@@ -1,6 +1,7 @@
 library(geocacheR)
 library(testthat)
 library(dplyr)
+library(tidyr)
 
 context("rot")
 
@@ -22,6 +23,7 @@ test_that("rot output matches expected values", {
   )
 })
 
+
 context("rot_all")
 
 test_that("rot_all outputs are of the same length as the alphabet", {
@@ -33,6 +35,7 @@ test_that("rot_all outputs are as expected", {
   expect_equal(rot_all("a", alphabet=letters[1:4]), c("b", "c", "d", "a"))
 })
 
+
 context("vigenere")
 
 test_that("vigenere outputs equal to expected values", {
@@ -42,4 +45,43 @@ test_that("vigenere outputs equal to expected values", {
   expect_equal(
     vigenere("the 'quick' brown f4ox", key = "te s1t", decrypt = FALSE),
     "mlw 'jnmud' uvgpg j4gq")
+})
+
+
+context("analyse_frequency")
+
+test_that("analyse_frequency outputs equal to expected values", {
+  expect_equal(
+    analyse_frequency("abcxyz!") %>% select(-input_string) %>% rowSums(),
+    7L)
+  expect_equal(
+    analyse_frequency("abcxyz!")[, c("D", "B", "X")],
+    data.frame(D=0L, B=1L, X=1L))
+  expect_equal(
+    analyse_frequency("") %>% select(-input_string) %>% rowSums(),
+    0L)
+})
+test_that("vectorised inputs", {
+  expect_equal(
+    analyse_frequency(c("hello", "world!")) %>% select(-input_string) %>% rowSums(),
+    c(5L, 6L))
+  expect_equal(
+    analyse_frequency(c("hello", "world!"))$L,
+    c(2L, 1L))
+  expect_equal(
+    analyse_frequency(c("hello", "world!"))$`!`,
+    c(0L, 1L))
+})
+test_that("unicode inputs", {
+  expect_equal(
+    analyse_frequency(c("\u2e18Hola\u203d")) %>% select(-!!LETTERS, -input_string) %>% unlist(use.names = FALSE),
+    c(1L, 1L))
+  expect_equal(
+    analyse_frequency(c("brødløs")) %>% select(-input_string) %>% apply(1, max),
+    2L)
+})
+test_that("dataframe-unfriendly inputs", {
+  expect_equal(
+    analyse_frequency("\t\n\r \ud\u6") %>% select(-input_string) %>% rowSums(),
+    6L)
 })

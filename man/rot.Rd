@@ -11,7 +11,7 @@ rot(x, n = 13, alphabet = standard_alphabet, showWarn = TRUE)
 
 \item{n}{A number of letters to shift the string by.}
 
-\item{alphabet}{A list containing lower and upper case alphabets.}
+\item{alphabet}{A list containing lower and upper case alphabets}
 
 \item{showWarn}{boolean. Do you want to see warnings about alphabets?}
 }

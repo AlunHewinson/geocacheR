@@ -173,7 +173,7 @@ analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabe
       freq[names(freq) %in% alphabet] <- freq[names(freq) %in% alphabet] - 1
       freq %>% as.matrix() %>% t() %>% as.data.frame()
     })
-  toRet <- tables %>% bind_rows()
+  toRet <- tables %>% bind_rows() %>% mutate_all(replace_na, 0)
   toRet$input_string <- x
   toRet
 }
@@ -192,15 +192,7 @@ analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabe
 #'
 #'
 alphash <- function(x, case_sensitive=FALSE, alphabet=standard_alphabet) {
-  #if(case_sensitive) {
-  #  alphabet %<>% unlist() %>% unique()
-  #} else {
-  #  x %<>% toupper()
-  #  alphabet %<>% unlist() %>% toupper() %>% unique()
-  #}
-
   x %>%
-    #analyse_frequency(case_sensitive = case_sensitive) %>%
     analyse_frequency() %>%
     select(!!alphabet) %>%
     apply(1, function(qq) qq %>% as.hexmode %>% paste(collapse="g"))

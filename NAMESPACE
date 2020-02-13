@@ -2,6 +2,7 @@
 
 export(Scrabble)
 export(Scrabble_score)
+export(analyse_frequency)
 export(base64)
 export(expressCoordinates)
 export(parseCoordinates)

@@ -5,7 +5,8 @@ Imports:
     stringr,
     magrittr,
     tibble,
-    threewords
+    threewords,
+    tidyr
 Title: Tools for Geocaching
 Version: 0.1.0.9001
 Date: 2020-02-02

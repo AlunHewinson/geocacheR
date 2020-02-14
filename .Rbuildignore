@@ -8,3 +8,4 @@ devtools_check_debian.md
 News.md
 ^\nobuild\*$
 ^CRAN-RELEASE$
+.travis.yml

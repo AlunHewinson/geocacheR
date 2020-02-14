@@ -152,6 +152,8 @@ qqmiaiii <- function(x, key, alphabet=standard_alphabet) {
 #' @param x A character vector
 #' @param case_sensitive Logical. Should lower and upper case letters be kept separate
 #' @param alphabet A list containing lower and upper case alphabets
+#' @param collapse A character value to be passed to paste() to collapse x into a single string.
+#' If collapse=FALSE (default), no collapse is implemented
 #'
 #' @return A tibble of the frequencies, with one row for each input string
 #'
@@ -173,7 +175,7 @@ analyse_frequency <- function(x, case_sensitive=FALSE, alphabet=standard_alphabe
       freq[names(freq) %in% alphabet] <- freq[names(freq) %in% alphabet] - 1
       freq %>% as.matrix() %>% t() %>% as.data.frame()
     })
-  toRet <- tables %>% bind_rows() %>% mutate_all(replace_na, 0)
+  toRet <- tables %>% bind_rows() %>% mutate_all(tidyr::replace_na, 0)
   toRet$input_string <- x
   toRet
 }

@@ -17,6 +17,9 @@ analyse_frequency(
 \item{case_sensitive}{Logical. Should lower and upper case letters be kept separate}
 
 \item{alphabet}{A list containing lower and upper case alphabets}
+
+\item{collapse}{A character value to be passed to paste() to collapse x into a single string.
+If collapse=FALSE (default), no collapse is implemented}
 }
 \value{
 A tibble of the frequencies, with one row for each input string

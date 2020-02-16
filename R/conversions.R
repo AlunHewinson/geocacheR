@@ -118,7 +118,7 @@ base64 <- tibble::tribble(
 
 #' Finds the digital root (tvaersum in Danish) of a number
 #'
-#' @alias digital_root
+#' @aliases digital_root
 #'
 #' @param x A number
 #' @param warnDecimal Logical. If TRUE, a warning will be issued if x contains a decimal
@@ -140,7 +140,7 @@ tvaersum <- function(x, warnDecimal=TRUE) {
     as.character() %>%
     str_split("") %>%
     unlist() %>%
-    `[`(. %in% 1:8) %>%
+    `[`(. %in% 1:9) %>%
     as.integer() %>%
     sum() %>%
     tvaersum()

@@ -13,10 +13,12 @@ test_that("rot inputs and outputs are of equal length", {
 test_that("rot output matches expected values", {
   expect_equal(rot("a"), "n")
   expect_equal(rot("abc", -1), "zab")
-  expect_equal(rot("6acb9296d8d3758f6817558a07b95d85", 1,
-               alphabet=list(lw=c(0:9, letters[1:6]),
-                             up=c(0:9, LETTERS[1:6]))),
-               "7bdca3a7e9e486907928669b18ca6e96")
+  expect_equal(
+    suppressWarnings(
+      rot("6acb9296d8d3758f6817558a07b95d85", 1,
+          alphabet=list(lw=c(0:9, letters[1:6]),
+                        up=c(0:9, LETTERS[1:6])))),
+      "7bdca3a7e9e486907928669b18ca6e96")
   expect_equal(
     rot("Abc4567xyZ", 3, alphabet=list(lw=c(letters, 0:4), up=c(LETTERS, 5:9))),
     "Defc89A017"

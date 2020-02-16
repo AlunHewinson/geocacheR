@@ -115,3 +115,37 @@ base64 <- tibble::tribble(
   61, "111101", "9",
   62, "111110", "+",
   63, "111111", "/")
+
+#' Finds the digital root (tvaersum in Danish) of a number
+#'
+#' @alias digital_root
+#'
+#' @param x A number
+#' @param warnDecimal Logical. If TRUE, a warning will be issued if x contains a decimal
+#'
+#' @return An integer
+#'
+#' @examples
+#' tvaersum(91256015)
+#' tvaersum("(844) 448-1212)")
+#'
+#' @export
+tvaersum <- function(x, warnDecimal=TRUE) {
+  if (str_detect(x, "\\.") & warnDecimal) {
+    warning(paste0("x contains a decimal point. Digits after a decimal point ",
+                   "will be treated as ordinary digits."))
+  }
+  if (is.integer(x)) if (x < 10) return(x)
+  x %>%
+    as.character() %>%
+    str_split("") %>%
+    unlist() %>%
+    `[`(. %in% 1:8) %>%
+    as.integer() %>%
+    sum() %>%
+    tvaersum()
+}
+
+#' @export
+digital_root <- tvaersum
+

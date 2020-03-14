@@ -149,3 +149,119 @@ tvaersum <- function(x, warnDecimal=TRUE) {
 #' @export
 digital_root <- tvaersum
 
+#' Convert between GC codes and GC ids
+#'
+#' @param x either a valid GC code, or the id of the cache
+#'
+#' @return a list of conversions, each element being a list of length two.
+#' The first element will be called \code{code} and will be the GC code.
+#' The second element will be \code{id} and will be a character value of the equivalent id
+#'
+#' @examples
+#' convert_gc("12345")
+#' convert_gc(54321)
+#' convert_gc("GC3NWRQ")
+convert_gc <- function(x) {
+  lapply(x, convert_gc_single)
+}
+
+convert_gc_single <- function(x) {
+  if (is.numeric(x)) {
+    if (x < 1) {
+      warning("geocacheR::convert_gc() -- x cannot be a numeric less than 1")
+      return(list(code=NA_character_, id=NA_character_))
+    }
+    if (x %% 1 != 0) {
+      warning("geocacheR::convert_gc() -- if x is a numeric it must be a whole number")
+      return(list(code=NA_character_, id=NA_character_))
+    }
+    x %<>% as.character()
+  }
+  if (!is.character(x)) {
+    warning("geocacheR::convert_gc() -- x must be a character or numeric")
+    return(list(code=NA_character_, id=NA_character_))
+  }
+  x %<>% toupper() %>%
+    #str_replace_all("[^0-9QWERTYPADFGHJKZXCVBNM]", "")
+    str_replace_all("[^0-9A-Z]", "")
+
+  if (str_sub(x, 1, 2)=="GC") {
+    ## GC code
+    code <- x
+    x %<>% str_replace("GC(0*)", "")
+    if (nchar(x) <= 3) {
+      ## 0-9A-F only
+      if (str_detect(x, "[^0-9A-F]")) {
+        warning("geocacheR::convert_gc() -- GC codes of ")
+        return(list(code=NA_character_, id=NA_character_))
+      }
+      x %<>%
+        str_split("") %>%
+        unlist() %>%
+        match(c(0:9, LETTERS[1:6])) %>%
+        subtract(1)
+      powers <- 16^(seq(length(x))-1) %>% rev()
+      id <- (x * powers) %>% sum() %>%
+        as.character()
+    } else if (nchar(x) == 4) {
+      ## 0-9A-Z minus ILOSU unless the first char is <= F
+      x %<>%
+        str_split("") %>%
+        unlist()
+      if (x[1] <= "F") {
+        ## 0-9A-F only
+        if (any(str_detect(x, "[^0-9A-F]"))) {
+          warning("geocacheR::convert_gc() -- GC codes of ")
+          return(list(code=NA_character_, id=NA_character_))
+        }
+        x %<>%
+          match(c(0:9, LETTERS[1:6])) %>%
+          subtract(1)
+        powers <- 16^(seq(length(x))-1) %>% rev()
+        id <- (x * powers) %>% sum() %>%
+          as.character()
+      } else {
+        x %<>%
+          match(c(0:9, LETTERS)[-c(19, 22, 25, 29, 31)]) %>%
+          subtract(1)
+        powers <- 31^(seq(length(x))-1) %>% rev()
+        id <- (x * powers) %>% sum() %>%
+          subtract(411120) %>%
+          as.character()
+      }
+    } else {
+      ## 0-9A-Z minus ILOSU
+      x %<>%
+        str_split("") %>%
+        unlist() %>%
+        match(c(0:9, LETTERS)[-c(19, 22, 25, 29, 31)]) %>%
+        subtract(1)
+      powers <- 31^(seq(length(x))-1) %>% rev()
+      id <- (x * powers) %>% sum() %>%
+        subtract(411120) %>%
+        as.character()
+    }
+  } else if (str_detect(x, "[^0-9]")) {
+    ## error, non-numbers in id detected
+    warning("geocacheR::convert_gc() -- x must be a valid GC code or an id containing only numbers")
+    return(list(code=NA_character_, id=NA_character_))
+  } else {
+    ## valid id
+    id <- x
+    bs <- 16
+    dg <- c(0:9, LETTERS[1:6])
+    if (as.numeric(x) > 65535) {
+      x %<>% as.numeric() %>% add(411120)
+      bs <- 31
+      dg <- c(0:9, LETTERS)[-c(19, 22, 25, 29, 31)]
+    } else {
+      x %<>% as.numeric()
+    }
+
+    pows <- floor(log(x, base = bs)):0 + 1
+    code <- c("GC", dg[1 + (x %% bs^pows %/% bs^(pows-1))]) %>%
+      paste(collapse="") %T>% print() %>%
+      str_replace("^GC0*", "GC")
+  }
+  return(list(code=code, id=id))
+}

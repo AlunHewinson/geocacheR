@@ -4,7 +4,9 @@
 \name{standard_alphabet}
 \alias{standard_alphabet}
 \title{The standard alphabet for the locale, for use in Caesar-based encryption etc.}
-\format{An object of class \code{list} of length 2.}
+\format{
+An object of class \code{list} of length 2.
+}
 \usage{
 standard_alphabet
 }

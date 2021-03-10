@@ -161,6 +161,8 @@ digital_root <- tvaersum
 #' convert_gc("12345")
 #' convert_gc(54321)
 #' convert_gc("GC3NWRQ")
+#'
+#' @export
 convert_gc <- function(x) {
   lapply(x, convert_gc_single)
 }

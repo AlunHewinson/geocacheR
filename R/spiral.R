@@ -51,4 +51,4 @@ spiralise <- function(x, r, c) {
   m
 }
 
-spiralise(letters, 13, 2)
+#spiralise(letters, 13, 2)

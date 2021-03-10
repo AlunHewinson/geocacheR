@@ -23,5 +23,5 @@ Convert from latitude & longitude to British Grid
 only datum = "osgb36" currently supported
 }
 \examples{
-ll_to_os()
+ll_to_os(56.0000, -3.0000)
 }

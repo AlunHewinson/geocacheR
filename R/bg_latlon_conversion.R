@@ -157,7 +157,7 @@ os_to_ll <- function(E, N, datum='osgb36') {
 #' @return A numeric vector of two: the East and North of the grid coordinates
 #'
 #' @examples
-#' ll_to_os()
+#' ll_to_os(56.0000, -3.0000)
 #' @export
 ll_to_os <- function(phi, lam, datum='osgb36') {
   # Transverse Mercator projection parameters: Map coordinates of true origin,
